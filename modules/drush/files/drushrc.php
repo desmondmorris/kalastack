@@ -156,7 +156,7 @@ $options['shell-aliases']['dis-all'] = '!drush -y dis $(drush pml --status=enabl
  * line, paths may be separated by a colon (:) on Unix-based systems or a
  * semi-colon (;) on Windows.
  */
-$options['alias-path'] = array('/var/www/.drush');
+$options['alias-path'] = array('/etc/drush/aliases', '/etc/kalastack/aliases');
 
 /**
  * Specify the folder where 'sql-sync' should store persistent dump files.
@@ -259,7 +259,10 @@ $options['alias-path'] = array('/var/www/.drush');
  * commands when the "--structure-tables-key=common" option is provided.
  * You may add specific tables to the existing array or add a new element.
  */
-$options['structure-tables']['common'] = array('cache', 'cache_filter', 'cache_menu', 'cache_page', 'history', 'sessions', 'watchdog');
+
+$options['structure-tables']['common'] = array('cache', 'cache_filter', 'cache_menu', 'cache_page', 'history', 'sessions', 'watchdog',
+  'cache_admin_menu', 'cache_block', 'cache_bootstrap', 'cache_field', 'cache_form', 'cache_image', 'cache_path', 'cache_rules',
+  'cache_token', 'cache_update', 'cache_views', 'cache_views_data');
 
 /**
  * List of tables to be omitted entirely from SQL dumps made by the 'sql-dump'
@@ -327,6 +330,13 @@ $options['structure-tables']['common'] = array('cache', 'cache_filter', 'cache_m
  * command (e.g. /bin/grep).
  */
 # $command_specific['core-cli'] = array('override' => 'help,dd,sa');
+
+$command_specific['rsync'] = array(
+  'verbose' => TRUE,
+  'exclude-paths' => '.git:.DS_Store:.gitignore:.gitmodules',
+  //'mode' => 'rlptDz',
+);
+
 
 /**
  * Load a drushrc file from the 'drush' folder at the root of the current
